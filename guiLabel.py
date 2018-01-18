@@ -24,4 +24,8 @@ my_text.config(text=textBoard)
 
 my_text.config(highlightcolor='red', highlightthickness=6, relief='solid')
 
+
+# Setting location in grid
+my_text.grid(row=0, column=0)
+
 root.mainloop()
