@@ -7,27 +7,27 @@ root = Tk()
 # Setting size
 root.geometry("400x400+100+100")
 
-my_text = Label(root, text="Hello World", anchor='nw')#justify="left")
-my_text.pack(fill='both')
+labelBoard = Label(root, text="Hello World", anchor='nw')#justify="left")
+labelBoard.pack(fill='both')
 
 
 #Custom font
 my_font = Font(family='Consolas',size=15)
 
-my_text.config(text='New Words')
+labelBoard.config(text='New Words')
 
 # Setting the font(monospace)
-my_text.config(font=my_font)
+labelBoard.config(font=my_font)
 
 # Setting the text bg
-my_text.config(text=textBoard)
+labelBoard.config(text=textBoard)
 
-my_text.config(bg='red')
-my_text.config(highlightthickness=6)
-my_text.config(relief='solid')
+labelBoard.config(bg='red')
+labelBoard.config(highlightthickness=6)
+labelBoard.config(relief='solid')
 
 
 # Setting location in grid
-my_text.grid(row=0, column=0)
+labelBoard.grid(row=0, column=0)
 
 root.mainloop()
