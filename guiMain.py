@@ -1,5 +1,5 @@
 from tkinter import Tk, Label
-from textRes import textBoard
+import textRes
 from tkinter.font import Font
 
 
@@ -15,7 +15,12 @@ def create_labelBoard(root):
     labelBoard.config(font=my_font)
 
     # Setting the text
-    labelBoard.config(text=textBoard)
+    # Works
+    # labelBoard.config(text=textRes.textBoard)
+
+    # Alternate
+    labelBoard.config(text=textRes.array2D_to_string(textRes.init_list2D()))
+
 
     # Set background color as red
     labelBoard.config(bg='red')
