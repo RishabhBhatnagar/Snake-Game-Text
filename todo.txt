@@ -2,7 +2,7 @@
 Added: 2018-01-18 21:26
 1) Change hardcoded text, to nested list so it is 2D
  1a) Implement 2D array to string functioning to set content of the label
-
+Finished: As of: 9c945a33ff "Created 2D list as bg, and using soft functions"
 
 Added: 2018-01-18 21:56
 2) Create key-bind functions, for snake movement
