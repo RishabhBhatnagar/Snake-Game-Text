@@ -1,0 +1,4 @@
+
+Added: 2018-01-18 21:26
+1) Change hardcoded text, to nested list so it is 2D
+ 1a) Implement 2D array to string functioning to set content of the label
