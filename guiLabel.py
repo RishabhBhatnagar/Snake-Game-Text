@@ -22,7 +22,9 @@ my_text.config(font=my_font)
 # Setting the text bg
 my_text.config(text=textBoard)
 
-my_text.config(highlightcolor='red', highlightthickness=6, relief='solid')
+my_text.config(bg='red')
+my_text.config(highlightthickness=6)
+my_text.config(relief='solid')
 
 
 # Setting location in grid
