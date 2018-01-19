@@ -1,10 +1,13 @@
 
+
+width = 40
+height = 17
+
+
 def init_list2D():
     '''
     Creates a 2D list with characters placed at correct indices
     '''
-    width = 40
-    height = 17
 
     wholeList = []
     # append rowLists to this to create 2D array
