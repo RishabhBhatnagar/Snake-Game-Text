@@ -8,8 +8,12 @@ labelBoard = ''
 def keyA(event, labelBoard):
     print("a pressed")
     
-    lent_before_newline = labelBoard['text'].index('\n')
+    print('\nsnakeList\n', gameLogic.snakeList, '\n')
 
+    lent_before_newline = labelBoard['text'].index('\n') + 1
+    # +1 since if width is x, counting the newline, it becomes x+1
+
+    print("lent_before_newline=", lent_before_newline)
     # check image
     # since newline index will directly give the correct leng of row
     newString = labelBoard['text']

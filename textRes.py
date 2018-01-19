@@ -3,7 +3,6 @@
 width = 40
 height = 17
 
-
 def init_list2D():
     '''
     Creates a 2D list with characters placed at correct indices
