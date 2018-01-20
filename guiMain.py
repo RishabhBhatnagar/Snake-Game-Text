@@ -18,8 +18,26 @@ def keyA(event, labelBoard):
     # since newline index will directly give the correct leng of row
     newString = labelBoard['text']
 
+    def xy_to_str_index(x, y):
+        return y*lent_before_newline + (x)
+
+    x1, y1 = 0, 0
+    x1y1Loc = xy_to_str_index(x1, y1)
+    print("x1,y1", (x1, y1), "strI", )
+    print("type(x1y1Loc)", type(x1y1Loc))
+    newString = newString[:x1y1Loc] \
+        + "$" + newString[x1y1Loc+1:]
+    
+    x2, y2 = 0, 1
+    x2y2Loc = xy_to_str_index(x2, y2)
+    print("x2,y2", (x2, y2), "strI", )
+    newString = newString[:x2y2Loc] \
+        + "$" + newString[x2y2Loc+1:]
+
+
     def xy_to_str_replacing(x, y, newString, charToReplace):
-        locationForNewCharacter = int(y*lent_before_newline + (x+1))
+        # locationForNewCharacter = int(y*lent_before_newline + (x))
+        locationForNewCharacter = xy_to_str_index(x, y)
         print(locationForNewCharacter)
         '''
         # original
@@ -77,15 +95,23 @@ def keyA(event, labelBoard):
         print("snakeList[i]", gameLogic.snakeList[i])
         gameLogic.snakeList[i+1] = gameLogic.snakeList[i]
 
+
+    # If snake has run into the border
+    print("textRes.borderList", textRes.borderList)
+    print("head is at ", (gameLogic.snakeList[0][1], gameLogic.snakeList[0][0]))
+
+    # Using the [1][0]
+    # instead of the more correct [0][1]
+    # since in the list it is r,c ie y,x
+    # but i have used x,y
+    if (gameLogic.snakeList[0][1], gameLogic.snakeList[0][0])\
+       in textRes.borderList:
+        print("ERROR\n"*6)
+
     # Shifting head up one space, by giving it new co or dinates
     gameLogic.snakeList[0] = (gameLogic.snakeList[0][0],
                               gameLogic.snakeList[0][1] - 1)
 
-    # If snake has run into the border
-    print("textRes.borderList", textRes.borderList)
-    print("head is at ", gameLogic.snakeList[0])
-    if gameLogic.snakeList[0] in textRes.borderList:
-        print("ERROR\n"*6)
 
 
     print("New:", gameLogic.snakeList)
