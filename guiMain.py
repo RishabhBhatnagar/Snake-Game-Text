@@ -100,10 +100,11 @@ def change_position_up():
 
 def move_up(event, obj):
     #refresh_Grid(event, obj)
-    change_position_up()
-    gameLogic.boolMoved = True
-    refresh_Grid(event, obj)
-    gameLogic.boolMoved = False
+    if event.char is 'a':
+        change_position_up()
+        
+        refresh_Grid(event, obj)
+        
 
 def create_labelBoard(root):
 
