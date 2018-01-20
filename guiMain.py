@@ -60,8 +60,8 @@ def refresh_Grid(event, labelBoard):
     # Print head location
     print("head=", gameLogic.snakeList[0][1], gameLogic.snakeList[0][0])
 
-    #if gameLogic.snakeList[0][1] < 0 or gameLogic.snakeList[0][0] < 0:
-    if (gameLogic.snakeList[0][1], gameLogic.snakeList[0][0]) in textRes.borderList:
+    if gameLogic.snakeList[0][1] < 0 or gameLogic.snakeList[0][0] < 0 \
+    or (gameLogic.snakeList[0][1], gameLogic.snakeList[0][0]) in textRes.borderList:
         raise ValueError("Indices shouldn't be inside the border")
 
     # If snake has run into the border

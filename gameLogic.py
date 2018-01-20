@@ -15,6 +15,8 @@ snakeList.append(start_location)
 # Snake body of head + 2
 snakeList.append((start_location[0], start_location[1] + 1))
 snakeList.append((start_location[0], start_location[1] + 2))
+snakeList.append((start_location[0], start_location[1] + 3))
+snakeList.append((start_location[0], start_location[1] + 4))
 
 tailPosition = snakeList[-1]
 
