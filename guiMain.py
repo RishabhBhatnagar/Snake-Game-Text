@@ -81,6 +81,13 @@ def keyA(event, labelBoard):
     gameLogic.snakeList[0] = (gameLogic.snakeList[0][0],
                               gameLogic.snakeList[0][1] - 1)
 
+    # If snake has run into the border
+    print("textRes.borderList", textRes.borderList)
+    print("head is at ", gameLogic.snakeList[0])
+    if gameLogic.snakeList[0] in textRes.borderList:
+        print("ERROR\n"*6)
+
+
     print("New:", gameLogic.snakeList)
 
     if gameLogic.boolFirstRun:

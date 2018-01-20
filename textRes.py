@@ -6,6 +6,8 @@ border = '='
 blank = ' '
 snakeBody = '#'
 
+borderList = []
+
 def init_list2D():
     '''
     Creates a 2D list with characters placed at correct indices
@@ -26,9 +28,11 @@ def init_list2D():
             if r == 0 or r == height-1:
                 # first row, and last row
                 row.append(border)
+                borderList.append((r, c))
             elif c == 0 or c == width-1:
                 # first column and last column
                 row.append(border)
+                borderList.append((r, c))
 
             else:
                 # middle empty space
