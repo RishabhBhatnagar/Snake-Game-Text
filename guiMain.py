@@ -46,13 +46,14 @@ def refresh_Grid(event, labelBoard):
             # Replace # with a vairable like textRes.snakeBody
             newString = xy_to_str_replacing(x, y, newString, textRes.snakeBody)
 
-    # Storing the tail position so as to replace # with blank,
-    # in the next function call
-    gameLogic.tailPosition = gameLogic.snakeList[-1]
-    
-    for i in reversed(range(len(gameLogic.snakeList) - 1)):
-        # Passing the location of first position to the next position
-        gameLogic.snakeList[i+1] = gameLogic.snakeList[i]
+    if not gameLogic.boolMoved:
+        # Storing the tail position so as to replace # with blank,
+        # in the next function call
+        gameLogic.tailPosition = gameLogic.snakeList[-1]
+        
+        for i in reversed(range(len(gameLogic.snakeList) - 1)):
+            # Passing the location of first position to the next position
+            gameLogic.snakeList[i+1] = gameLogic.snakeList[i]
 
 
     # Print head location
@@ -93,7 +94,9 @@ def change_position_up():
 def move_up(event, obj):
     refresh_Grid(event, obj)
     change_position_up()
-    # refresh_Grid(event, obj)
+    gameLogic.boolMoved = True
+    refresh_Grid(event, obj)
+    gameLogic.boolMoved = False
 
 def create_labelBoard(root):
 

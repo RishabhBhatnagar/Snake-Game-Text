@@ -26,9 +26,6 @@ def init_list2D():
             Inside this for loop, set conditions
             on the characters when starting the game
             """
-            row.append(str(c % 10))
-            continue
-
             if r == 0 or r == height-1:
                 # first row, and last row
                 row.append(border)
