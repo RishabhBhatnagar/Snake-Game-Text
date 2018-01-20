@@ -5,6 +5,11 @@ import gameLogic
 
 labelBoard = ''
 
+def string_replace(newString, index, replacementChar):
+    newString = newString[:index] \
+        + replacementChar + newString[index+1:]
+    return newString
+
 def keyA(event, labelBoard):
     print("a pressed")
     
@@ -18,8 +23,7 @@ def keyA(event, labelBoard):
     # since newline index will directly give the correct leng of row
     newString = labelBoard['text']
 
-    def xy_to_str_index(x, y):
-        return y*lent_before_newline + (x)
+    def xy_to_str_index(x, y): return y*lent_before_newline + (x)
 
     x1, y1 = 0, 0
     x1y1Loc = xy_to_str_index(x1, y1)
@@ -34,23 +38,18 @@ def keyA(event, labelBoard):
     newString = newString[:x2y2Loc] \
         + "$" + newString[x2y2Loc+1:]
 
-
     def xy_to_str_replacing(x, y, newString, charToReplace):
-        # locationForNewCharacter = int(y*lent_before_newline + (x))
+        """
+        Pass x,y and the character to place in the position,
+        and this function will do it.
+        """
         locationForNewCharacter = xy_to_str_index(x, y)
         print(locationForNewCharacter)
-        '''
-        # original
-        newString = newString[:locationForNewCharacter] \
-            + "#" + newString[locationForNewCharacter+1:]
-        '''
-
-        newString = newString[:locationForNewCharacter] \
-            + charToReplace + newString[locationForNewCharacter+1:]
-        
+        newString = string_replace(newString,
+                                   locationForNewCharacter,
+                                   charToReplace)
 
         return newString
-        # pass
 
 
     if not gameLogic.boolFirstRun:
@@ -65,18 +64,9 @@ def keyA(event, labelBoard):
                                         textRes.blank)
 
     for x, y in gameLogic.snakeList:
-        # Replacing the correct location with snake character '#'
-
-
         # Replace # with a vairable like textRes.snakeBody
         newString = xy_to_str_replacing(x, y, newString, textRes.snakeBody)
-        """
-        # Original works try
-        locationForNewCharacter = int(y*lent_before_newline + (x+1))
-        print(locationForNewCharacter)
-        newString = newString[:locationForNewCharacter] \
-            + "#" + newString[locationForNewCharacter+1:]
-        """
+
 
 
     # Storing the tail position so as to replace # with blank,
@@ -106,7 +96,7 @@ def keyA(event, labelBoard):
     # but i have used x,y
     if (gameLogic.snakeList[0][1], gameLogic.snakeList[0][0])\
        in textRes.borderList:
-        print("ERROR\n"*6)
+        print("ERROR\n"*12)
 
     # Shifting head up one space, by giving it new co or dinates
     gameLogic.snakeList[0] = (gameLogic.snakeList[0][0],
