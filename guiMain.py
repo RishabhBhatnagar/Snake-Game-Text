@@ -86,6 +86,7 @@ def refresh_Grid(event, labelBoard):
     labelBoard.config(text=newString)
 
 
+'''
 def change_position_up():
     gameLogic.tailPosition = gameLogic.snakeList[-1]
         
@@ -96,14 +97,34 @@ def change_position_up():
     # Shifting head up one space, by giving it new co or dinates
     gameLogic.snakeList[0] = (gameLogic.snakeList[0][0],
                               gameLogic.snakeList[0][1] - 1)
+'''
+
+def change_position(direction):
+
+    if direction == 'up':
+        if (gameLogic.snakeList[0], gameLogic.snakeList[0][1] - 1) in gameLogic.snakeList:
+            print("Collision")
+            return
+
+    gameLogic.tailPosition = gameLogic.snakeList[-1]
+        
+    for i in reversed(range(len(gameLogic.snakeList) - 1)):
+        # Passing the location of first position to the next position
+        gameLogic.snakeList[i+1] = gameLogic.snakeList[i]
+
+    if direction == 'up':
+        # Shifting head up one space, by giving it new co or dinates
+        gameLogic.snakeList[0] = (gameLogic.snakeList[0][0],
+                                  gameLogic.snakeList[0][1] - 1)
 
 
 def move_up(event, obj):
     #refresh_Grid(event, obj)
     if event.char is 'a':
-        change_position_up()
+        # change_position_up()
+        change_position('up')
         
-        refresh_Grid(event, obj)
+    refresh_Grid(event, obj)
         
 
 def create_labelBoard(root):
