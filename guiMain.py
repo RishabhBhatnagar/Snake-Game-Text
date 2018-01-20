@@ -25,7 +25,7 @@ def xy_to_str_replacing(x, y, newString, charToReplace):
     return newString
 
 
-def keyA(event, labelBoard):
+def refresh_Grid(event, labelBoard):
     # Setting newString the content of labelBoard
     newString = labelBoard['text']
 
@@ -64,9 +64,6 @@ def keyA(event, labelBoard):
        in textRes.borderList:
         print("ERROR\n"*12)
 
-    # Shifting head up one space, by giving it new co or dinates
-    gameLogic.snakeList[0] = (gameLogic.snakeList[0][0],
-                              gameLogic.snakeList[0][1] - 1)
 
     if gameLogic.boolFirstRun:
         # if boolFirstRun is true
@@ -79,6 +76,18 @@ def keyA(event, labelBoard):
 
     # Set text of label
     labelBoard.config(text=newString)
+
+
+def change_position_up():
+    # Shifting head up one space, by giving it new co or dinates
+    gameLogic.snakeList[0] = (gameLogic.snakeList[0][0],
+                              gameLogic.snakeList[0][1] - 1)
+
+
+def move_up(event, obj):
+    refresh_Grid(event, obj)
+    change_position_up()
+    refresh_Grid(event, obj)
 
 def create_labelBoard(root):
 
@@ -108,8 +117,8 @@ def create_labelBoard(root):
     labelBoard.grid(row=0, column=0)
 
     # Trying updating snake on grid
-    root.bind('a', lambda event, obj=labelBoard: keyA(event, obj))
-
+    # root.bind('a', lambda event, obj=labelBoard: refresh_Grid(event, obj))
+    root.bind('a', lambda event, obj=labelBoard: move_up(event, obj))
 
     return labelBoard
 
