@@ -55,6 +55,12 @@ def refresh_Grid(event, labelBoard):
         gameLogic.snakeList[i+1] = gameLogic.snakeList[i]
 
 
+    # Print head location
+    print("head=", gameLogic.snakeList[0][1], gameLogic.snakeList[0][0])
+
+    if gameLogic.snakeList[0][1] < 0 or gameLogic.snakeList[0][0] < 0:
+        raise ValueError("Indices shouldn't be less than 0")
+
     # If snake has run into the border
     # Using the [1][0]
     # instead of the more correct [0][1]
@@ -87,7 +93,7 @@ def change_position_up():
 def move_up(event, obj):
     refresh_Grid(event, obj)
     change_position_up()
-    refresh_Grid(event, obj)
+    # refresh_Grid(event, obj)
 
 def create_labelBoard(root):
 
