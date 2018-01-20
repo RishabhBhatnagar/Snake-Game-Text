@@ -138,7 +138,7 @@ def change_position(direction):
         gameLogic.snakeList[0] = (gameLogic.snakeList[0][0] + 1,
                                   gameLogic.snakeList[0][1])
 
-def move_up(event, obj, key):
+def move(event, obj, key):
     #refresh_Grid(event, obj)
     if event.char is 'w':
         # change_position_up()
@@ -182,10 +182,10 @@ def create_labelBoard(root):
 
     # Trying updating snake on grid
     # root.bind('a', lambda event, obj=labelBoard: refresh_Grid(event, obj))
-    root.bind('a', lambda event, obj=labelBoard: move_up(event, obj, 'a'))
-    root.bind('w', lambda event, obj=labelBoard: move_up(event, obj, 'w'))
-    root.bind('s', lambda event, obj=labelBoard: move_up(event, obj, 's'))
-    root.bind('d', lambda event, obj=labelBoard: move_up(event, obj, 'd'))
+    root.bind('a', lambda event, obj=labelBoard: move(event, obj, 'a'))
+    root.bind('w', lambda event, obj=labelBoard: move(event, obj, 'w'))
+    root.bind('s', lambda event, obj=labelBoard: move(event, obj, 's'))
+    root.bind('d', lambda event, obj=labelBoard: move(event, obj, 'd'))
 
     return labelBoard
 
