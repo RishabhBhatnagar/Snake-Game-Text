@@ -5,6 +5,7 @@ height = 17
 border = '='
 blank = ' '
 snakeBody = '#'
+snakeHead = '@'
 
 borderList = []
 

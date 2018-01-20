@@ -40,8 +40,11 @@ def keyA(event, labelBoard):
                                         textRes.blank)
 
     for x, y in gameLogic.snakeList:
-        # Replace # with a vairable like textRes.snakeBody
-        newString = xy_to_str_replacing(x, y, newString, textRes.snakeBody)
+        if (x, y) == gameLogic.snakeList[0]:
+            newString = xy_to_str_replacing(x, y, newString, textRes.snakeHead)
+        else:
+            # Replace # with a vairable like textRes.snakeBody
+            newString = xy_to_str_replacing(x, y, newString, textRes.snakeBody)
 
     # Storing the tail position so as to replace # with blank,
     # in the next function call
