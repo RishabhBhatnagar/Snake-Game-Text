@@ -85,7 +85,6 @@ def refresh_Grid(event, labelBoard):
     # Set text of label
     labelBoard.config(text=newString)
 
-
 '''
 def change_position_up():
     gameLogic.tailPosition = gameLogic.snakeList[-1]
@@ -102,7 +101,19 @@ def change_position_up():
 def change_position(direction):
 
     if direction == 'up':
-        if (gameLogic.snakeList[0], gameLogic.snakeList[0][1] - 1) in gameLogic.snakeList:
+        if (gameLogic.snakeList[0][0], gameLogic.snakeList[0][1] - 1) in gameLogic.snakeList:
+            print("Collision")
+            return
+    elif direction == 'left':
+        if (gameLogic.snakeList[0][0] - 1, gameLogic.snakeList[0][1]) in gameLogic.snakeList:
+            print("Collision")
+            return
+    elif direction == 'down':
+        if (gameLogic.snakeList[0][0], gameLogic.snakeList[0][1] + 1) in gameLogic.snakeList:
+            print("Collision")
+            return
+    elif direction == 'right':
+        if (gameLogic.snakeList[0][0] + 1, gameLogic.snakeList[0][1]) in gameLogic.snakeList:
             print("Collision")
             return
 
@@ -116,14 +127,28 @@ def change_position(direction):
         # Shifting head up one space, by giving it new co or dinates
         gameLogic.snakeList[0] = (gameLogic.snakeList[0][0],
                                   gameLogic.snakeList[0][1] - 1)
+    elif direction == 'left':
+        gameLogic.snakeList[0] = (gameLogic.snakeList[0][0] - 1,
+                                  gameLogic.snakeList[0][1])
+    elif direction == 'down':
+        gameLogic.snakeList[0] = (gameLogic.snakeList[0][0],
+                                  gameLogic.snakeList[0][1] + 1)
+    elif direction == 'right':
+        gameLogic.snakeList[0] = (gameLogic.snakeList[0][0] + 1,
+                                  gameLogic.snakeList[0][1])
 
-
-def move_up(event, obj):
+def move_up(event, obj, key):
     #refresh_Grid(event, obj)
-    if event.char is 'a':
+    if event.char is 'w':
         # change_position_up()
         change_position('up')
-        
+    elif event.char is 'a':
+        change_position('left')
+    elif event.char is 's':
+        change_position('down')
+    elif event.char is 'd':
+        change_position('right')
+
     refresh_Grid(event, obj)
         
 
@@ -156,10 +181,10 @@ def create_labelBoard(root):
 
     # Trying updating snake on grid
     # root.bind('a', lambda event, obj=labelBoard: refresh_Grid(event, obj))
-    root.bind('a', lambda event, obj=labelBoard: move_up(event, obj))
-    root.bind('w', lambda event, obj=labelBoard: move_up(event, obj))
-    root.bind('s', lambda event, obj=labelBoard: move_up(event, obj))
-    root.bind('d', lambda event, obj=labelBoard: move_up(event, obj))
+    root.bind('a', lambda event, obj=labelBoard: move_up(event, obj, 'a'))
+    root.bind('w', lambda event, obj=labelBoard: move_up(event, obj, 'w'))
+    root.bind('s', lambda event, obj=labelBoard: move_up(event, obj, 's'))
+    root.bind('d', lambda event, obj=labelBoard: move_up(event, obj, 'd'))
 
     return labelBoard
 
