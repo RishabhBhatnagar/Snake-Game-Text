@@ -92,7 +92,7 @@ def change_position_up():
     for i in reversed(range(len(gameLogic.snakeList) - 1)):
         # Passing the location of first position to the next position
         gameLogic.snakeList[i+1] = gameLogic.snakeList[i]
-    
+
     # Shifting head up one space, by giving it new co or dinates
     gameLogic.snakeList[0] = (gameLogic.snakeList[0][0],
                               gameLogic.snakeList[0][1] - 1)
@@ -135,6 +135,9 @@ def create_labelBoard(root):
     # Trying updating snake on grid
     # root.bind('a', lambda event, obj=labelBoard: refresh_Grid(event, obj))
     root.bind('a', lambda event, obj=labelBoard: move_up(event, obj))
+    root.bind('w', lambda event, obj=labelBoard: move_up(event, obj))
+    root.bind('s', lambda event, obj=labelBoard: move_up(event, obj))
+    root.bind('d', lambda event, obj=labelBoard: move_up(event, obj))
 
     return labelBoard
 
