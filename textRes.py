@@ -2,6 +2,9 @@
 
 width = 40
 height = 17
+border = '='
+blank = ' '
+snakeBody = '#'
 
 def init_list2D():
     '''
@@ -11,7 +14,7 @@ def init_list2D():
     wholeList = []
     # append rowLists to this to create 2D array
 
-    border = '='
+    # border = '='
 
     for r in range(height):
         row = []

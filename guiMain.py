@@ -18,12 +18,79 @@ def keyA(event, labelBoard):
     # since newline index will directly give the correct leng of row
     newString = labelBoard['text']
 
+    def xy_to_str_replacing(x, y, newString, charToReplace):
+        locationForNewCharacter = int(y*lent_before_newline + (x+1))
+        print(locationForNewCharacter)
+        '''
+        # original
+        newString = newString[:locationForNewCharacter] \
+            + "#" + newString[locationForNewCharacter+1:]
+        '''
+
+        newString = newString[:locationForNewCharacter] \
+            + charToReplace + newString[locationForNewCharacter+1:]
+        
+
+        return newString
+        # pass
+
+
+    if not gameLogic.boolFirstRun:
+        # If this is not the first run
+        # Then at tailPosition put blank
+        # tailPosition contains location of tail, as per
+        # last function call
+        print('tailreplace')
+        newString = xy_to_str_replacing(gameLogic.tailPosition[0],
+                                        gameLogic.tailPosition[1],
+                                        newString,
+                                        textRes.blank)
+
     for x, y in gameLogic.snakeList:
-        # labelBoard['text'][y*lent_before_newline + (x+1)] = "#"
+        # Replacing the correct location with snake character '#'
+
+
+        # Replace # with a vairable like textRes.snakeBody
+        newString = xy_to_str_replacing(x, y, newString, textRes.snakeBody)
+        """
+        # Original works try
         locationForNewCharacter = int(y*lent_before_newline + (x+1))
         print(locationForNewCharacter)
         newString = newString[:locationForNewCharacter] \
             + "#" + newString[locationForNewCharacter+1:]
+        """
+
+
+    # Storing the tail position so as to replace # with blank,
+    # in the next function call
+    print("original:tail", gameLogic.tailPosition)
+    gameLogic.tailPosition = gameLogic.snakeList[-1]
+    print("new:     tail", gameLogic.tailPosition)
+
+    print("Original:", gameLogic.snakeList)
+    # Making the snake go up, as standard game start position
+    for i in reversed(range(len(gameLogic.snakeList) - 1)):
+        # Passing the location of first position to the next position
+        # Last position will be lost
+        print("i=", i)
+        print("snakeList[i+1]", gameLogic.snakeList[i+1])
+        print("snakeList[i]", gameLogic.snakeList[i])
+        gameLogic.snakeList[i+1] = gameLogic.snakeList[i]
+
+    # Shifting head up one space, by giving it new co or dinates
+    gameLogic.snakeList[0] = (gameLogic.snakeList[0][0],
+                              gameLogic.snakeList[0][1] - 1)
+
+    print("New:", gameLogic.snakeList)
+
+    if gameLogic.boolFirstRun:
+        # if boolFirstRun is true
+        # then it means now the boolFirstRun is finished
+        # so we can make it False
+        print("first run over")
+        gameLogic.boolFirstRun = False
+
+
 
     # Set text of label
     labelBoard.config(text=newString)
