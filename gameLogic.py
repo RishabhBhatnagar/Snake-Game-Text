@@ -21,3 +21,6 @@ snakeList.append((start_location[0], start_location[1] + 4))
 tailPosition = snakeList[-1]
 
 boolFirstRun = True
+
+autoRun = True
+lastKeyPosition = 'up'

@@ -190,13 +190,28 @@ def create_labelBoard(root):
     return labelBoard
 
 
+def autoMoving(root, labelBo):
+    '''
+    Function which will keep the snake moving
+    '''
+    _ = ''
+    print("autorun")
+    change_position(gameLogic.lastKeyPosition)
+    refresh_Grid(_, labelBo)
+
+
+    # directly call change position
+
+
 def create_root(root):
     # root = Tk()
 
     # Setting size
     # root.geometry("400x400+100+100")
 
-    create_labelBoard(root)
+    labelBo = create_labelBoard(root)
+
+    root.after(1, lambda: autoMoving(root, labelBo))
 
     # Runs the window
     root.mainloop()
