@@ -142,6 +142,8 @@ def change_position(direction):
 
 def move(event, obj, key):
     #refresh_Grid(event, obj)
+    
+    '''
     if event.char is 'w':
         # change_position_up()
         change_position('up')
@@ -151,6 +153,12 @@ def move(event, obj, key):
         change_position('down')
     elif event.char is 'd':
         change_position('right')
+    '''
+
+    change_position(key)
+
+    # Updating lastKeyPosition
+    gameLogic.lastKeyPosition = key
 
     refresh_Grid(event, obj)
         
@@ -184,10 +192,10 @@ def create_labelBoard(root):
 
     # Trying updating snake on grid
     # root.bind('a', lambda event, obj=labelBoard: refresh_Grid(event, obj))
-    root.bind('a', lambda event, obj=labelBoard: move(event, obj, 'a'))
-    root.bind('w', lambda event, obj=labelBoard: move(event, obj, 'w'))
-    root.bind('s', lambda event, obj=labelBoard: move(event, obj, 's'))
-    root.bind('d', lambda event, obj=labelBoard: move(event, obj, 'd'))
+    root.bind('a', lambda event, obj=labelBoard: move(event, obj, 'left'))
+    root.bind('w', lambda event, obj=labelBoard: move(event, obj, 'up'))
+    root.bind('s', lambda event, obj=labelBoard: move(event, obj, 'down'))
+    root.bind('d', lambda event, obj=labelBoard: move(event, obj, 'right'))
 
     return labelBoard
 
