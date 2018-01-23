@@ -3,6 +3,8 @@ import textRes
 from tkinter.font import Font
 import gameLogic
 
+autoTime = 1000
+
 def string_replace(newString, index, replacementChar):
     newString = newString[:index] \
         + replacementChar + newString[index+1:]
@@ -198,6 +200,7 @@ def autoMoving(root, labelBo):
     print("autorun")
     change_position(gameLogic.lastKeyPosition)
     refresh_Grid(_, labelBo)
+    root.after(autoTime, lambda: autoMoving(root, labelBo))
 
 
     # directly call change position
@@ -211,7 +214,9 @@ def create_root(root):
 
     labelBo = create_labelBoard(root)
 
-    root.after(1, lambda: autoMoving(root, labelBo))
+    global autoTime
+    autoTime = 1000
+    root.after(autoTime, lambda: autoMoving(root, labelBo))
 
     # Runs the window
     root.mainloop()
