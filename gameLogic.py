@@ -1,5 +1,11 @@
 import textRes
 from random import randint
+import time
+
+timer = time.time
+startTime = 0
+endTime = 0                    #Timer for special food
+
 
 autoTime = 1000
 
@@ -8,6 +14,7 @@ points = 0
 foodCounter = 0
 specialFoodFrequency = 3
 specialFoodGenerated = False
+splFoodMaxTime = 5
 lastAteCounter = 0
 ate = True
 
