@@ -1,7 +1,18 @@
 import textRes
 from random import randint
 
+autoTime = 1000
+
+points = 0
+
+foodCounter = 0
+specialFoodFrequency = 3
+specialFoodGenerated = False
+lastAteCounter = 0
 ate = True
+
+normalPoints = 10
+specialPoints = 50
 snakeList = []
 
 w, h = textRes.width, textRes.height
@@ -35,3 +46,5 @@ def foodLocation(w, h):
     return food
 generateFood = foodLocation(w, h)
 (foodX, foodY) = (0,0)
+
+splFoodX, splFoodY = 0, 0

@@ -4,9 +4,6 @@ from tkinter.font import Font
 import gameLogic
 from random import randint
 
-
-autoTime = 1000
-
 def string_replace(newString, index, replacementChar):
     newString = newString[:index] \
         + replacementChar + newString[index+1:]
@@ -74,9 +71,35 @@ def refresh_Grid(event, labelBoard):
     print("food =", gameLogic.foodX, gameLogic.foodY)
 
 
+
+
     #Check if snake swallowed the food :
     if gameLogic.foodY == gameLogic.snakeList[0][1] and gameLogic.foodX == gameLogic.snakeList[0][0]:
         gameLogic.ate = True
+        gameLogic.points = gameLogic.points + gameLogic.normalPoints
+        gameLogic.foodCounter = gameLogic.foodCounter + 1
+        print("Points:", gameLogic.points)
+
+    print("Ate : ", gameLogic.foodCounter)
+    if gameLogic.foodCounter % gameLogic.specialFoodFrequency == 0:
+        if gameLogic.specialFoodGenerated == False:
+            if gameLogic.foodCounter != gameLogic.lastAteCounter:
+                gameLogic.splFoodX, gameLogic.splFoodY = gameLogic.generateFood()
+                newString = xy_to_str_replacing(gameLogic.splFoodX, gameLogic.splFoodY, newString, "%")
+                gameLogic.specialFoodGenerated = True
+                gameLogic.lastAteCounter = gameLogic.foodCounter
+
+    if gameLogic.specialFoodGenerated == True :
+        if gameLogic.splFoodX == gameLogic.snakeList[0][0]:
+            if gameLogic.splFoodY == gameLogic.snakeList[0][1]:
+                print("SpecialSwallowed.")
+                gameLogic.points = gameLogic.points + gameLogic.specialPoints
+                print("Points :", gameLogic.points)
+                gameLogic.specialFoodGenerated = False
+
+
+
+
 
 
     if gameLogic.snakeList[0][1] < 0 or gameLogic.snakeList[0][0] < 0 \
@@ -225,7 +248,7 @@ def autoMoving(root, labelBo):
     print("autorun")
     change_position(gameLogic.lastKeyPosition)
     refresh_Grid(_, labelBo)
-    root.after(autoTime, lambda: autoMoving(root, labelBo))
+    root.after(gameLogic.autoTime, lambda: autoMoving(root, labelBo))
 
 
     # directly call change position
@@ -239,9 +262,7 @@ def create_root(root):
 
     labelBo = create_labelBoard(root)
 
-    global autoTime
-    autoTime = 1000
-    root.after(autoTime, lambda: autoMoving(root, labelBo))
+    root.after(gameLogic.autoTime, lambda: autoMoving(root, labelBo))
 
     # Runs the window
     root.mainloop()
