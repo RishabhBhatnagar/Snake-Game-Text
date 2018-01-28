@@ -1,9 +1,10 @@
 import textRes
+from random import randint
 
+ate = True
 snakeList = []
 
 w, h = textRes.width, textRes.height
-
 start_location = (int(w/2), int(h/2))
 
 # Snake head is at start_location
@@ -24,3 +25,13 @@ boolFirstRun = True
 
 autoRun = True
 lastKeyPosition = 'up'
+
+#Generating food location :
+def foodLocation(w, h):
+    def food():
+        x = randint(2, w-2)
+        y = randint(2, h-2)
+        return (x, y)
+    return food
+generateFood = foodLocation(w, h)
+(foodX, foodY) = (0,0)

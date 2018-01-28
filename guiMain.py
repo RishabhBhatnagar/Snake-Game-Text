@@ -2,6 +2,8 @@ from tkinter import Tk, Label
 import textRes
 from tkinter.font import Font
 import gameLogic
+from random import randint
+
 
 autoTime = 1000
 
@@ -41,6 +43,14 @@ def refresh_Grid(event, labelBoard):
                                         newString,
                                         textRes.blank)
 
+
+    #food spawning in gui
+    if  gameLogic.ate == True:
+        (gameLogic.foodX, gameLogic.foodY) =gameLogic.generateFood()
+        newString = xy_to_str_replacing(gameLogic.foodX, gameLogic.foodY, newString, "*")
+        gameLogic.ate = False
+
+        
     for x, y in gameLogic.snakeList:
         if (x, y) == gameLogic.snakeList[0]:
             newString = xy_to_str_replacing(x, y, newString, textRes.snakeHead)
@@ -61,6 +71,13 @@ def refresh_Grid(event, labelBoard):
 
     # Print head location
     print("head=", gameLogic.snakeList[0][1], gameLogic.snakeList[0][0])
+    print("food =", gameLogic.foodX, gameLogic.foodY)
+
+
+    #Check if snake swallowed the food :
+    if gameLogic.foodY == gameLogic.snakeList[0][1] and gameLogic.foodX == gameLogic.snakeList[0][0]:
+        gameLogic.ate = True
+
 
     if gameLogic.snakeList[0][1] < 0 or gameLogic.snakeList[0][0] < 0 \
     or (gameLogic.snakeList[0][1], gameLogic.snakeList[0][0]) in textRes.borderList:
@@ -79,7 +96,7 @@ def refresh_Grid(event, labelBoard):
     if gameLogic.boolFirstRun:
         # if boolFirstRun is true
         # then it means now the boolFirstRun is finished
-        # so we can make it False
+        # so we can make it Falsemm
         print("first run over")
         gameLogic.boolFirstRun = False
 
