@@ -88,8 +88,16 @@ def refresh_Grid(event, labelBoard):
                 newString = xy_to_str_replacing(gameLogic.splFoodX, gameLogic.splFoodY, newString, "%")
                 gameLogic.specialFoodGenerated = True
                 gameLogic.lastAteCounter = gameLogic.foodCounter
+                gameLogic.startTime = gameLogic.timer()
 
+    
     if gameLogic.specialFoodGenerated == True :
+
+        if gameLogic.timer()-gameLogic.startTime > gameLogic.splFoodMaxTime:
+            newString = xy_to_str_replacing(gameLogic.splFoodX, gameLogic.splFoodY, newString, " ")
+            gameLogic.splFoodX, gameLogic.splFoodY = -1, -1
+            gameLogic.specialFoodGenerated = False
+        "Check if snake ate the specialFood"
         if gameLogic.splFoodX == gameLogic.snakeList[0][0]:
             if gameLogic.splFoodY == gameLogic.snakeList[0][1]:
                 print("SpecialSwallowed.")
