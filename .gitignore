@@ -1,0 +1,6 @@
+# Compiled folder
+__pycache__/
+
+# Jetbrains folder
+.idea/
+*.iml
