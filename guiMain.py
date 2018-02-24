@@ -1,8 +1,11 @@
-from tkinter import Tk, Label
+from tkinter import Tk, Label, PhotoImage, Button, Entry, Frame, StringVar
 import textRes
 from tkinter.font import Font
 import gameLogic
 from random import randint
+
+
+
 
 def string_replace(newString, index, replacementChar):
     newString = newString[:index] \
@@ -211,11 +214,12 @@ def move(event, obj, key):
     refresh_Grid(event, obj)
         
 
-def create_labelBoard(root):
+def create_labelBoard(rootb):
 
     # Creating the labelBoard
     labelBoard = Label(root, text="Hello World", anchor='nw')
     labelBoard.pack(fill='both')
+   # labelBoard.size()
 
     # Setting the font(monospace)
     # Custom font
@@ -237,6 +241,7 @@ def create_labelBoard(root):
 
     # Setting location in grid
     labelBoard.grid(row=0, column=0)
+
 
     # Trying updating snake on grid
     # root.bind('a', lambda event, obj=labelBoard: refresh_Grid(event, obj))
@@ -261,14 +266,92 @@ def autoMoving(root, labelBo):
 
     # directly call change position
 
+    #THIS CODE IS YET TO BE MODIFIED FOR BUTTONS
+
+def set_up_name():
+    pass
+def get_text():
+    pass
+'''
+def get_text():
+    global e2
+
+
+def set_up_name():
+    sc = Tk()
+    sc.geometry("150x100+500+300")
+    l1=Label(sc, text="Enter your Name:")
+    l1.grid(row=0, column=1)
+
+    s=StringVar()
+    e1=Entry(sc, textvariable=s)
+    e1.grid(row=1, column=1)
+    e1.focus_set()
+    name=s.get()
+
+    print("--------"+name+"---------")
+
+    OK_butt=Button(sc, text="OK!", width=6, command=get_text)
+    OK_butt.grid(row=2, column=1)
+
+
+'''
 
 def create_root(root):
-    # root = Tk()
+    #root = Tk()
 
     # Setting size
-    # root.geometry("400x400+100+100")
+    root.geometry("700x400+250+200")
+
 
     labelBo = create_labelBoard(root)
+
+    use_x=12
+    use_y=2
+
+    frame = Frame()
+    frame.grid(row=0, column=1)
+    frame.config()
+
+
+   # THIS IS JUST USE TO ALLIGN  (0,0)
+    l1 = Label(frame,text='0,0', width=use_x )
+    l1.grid(row=0, column=0, sticky='ns')
+
+
+    b1 = Button(frame, text='NAME', bg='gray', width=use_x, height=use_y, command=set_up_name)# pady=8, padx=8
+    b1.grid_rowconfigure(0, weight=1)
+    b1.grid(row=0, column=1, sticky='ns')
+    # b1.grid(columnspan=2)
+
+    #THIS IS JUST USE TO ALLIGN (1,1)
+    l1=Label(frame,text='1,1', width=use_x)
+    l1.grid(row=1, column=1, sticky='ns')
+
+
+    b2 = Button(frame, text='NEW GAME', bg='purple', width=use_x, height=use_y)# pady=8, padx=8
+    b2.grid_rowconfigure(0, weight=1)
+    b2.grid(row=2, column=1, sticky='ns')
+
+   # THIS IS JUST USE TO ALLIGN(3,1)
+    l1 = Label(frame, text='3,1', width=use_x)
+    l1.grid(row=3, column=1, sticky='ns')
+
+
+
+    b3 = Button(frame, text='PAUSE', bg='green', width=use_x, height=use_y) # pady=8, padx=8
+    b3.grid_rowconfigure(0, weight=1)
+    b3.grid(row=4, column=1, sticky='ns')
+
+   # THIS IS JUST USE TO ALLIGN(5,1)
+    l1 = Label(frame, text='4,0', width=use_x)
+    l1.grid(row=5, column=1, sticky='ns')
+
+
+    b4 = Button(frame, text='RESET', bg='red', width=use_x, height=use_y)  # pady=8, padx=8
+    b4.grid_rowconfigure(0, weight=1)
+    b4.grid(row=6, column=1, sticky='ns')
+
 
     root.after(gameLogic.autoTime, lambda: autoMoving(root, labelBo))
 
@@ -279,4 +362,10 @@ def create_root(root):
 if __name__ == '__main__':
 
     root = Tk()
+
+
     create_root(root)
+
+
+
+
