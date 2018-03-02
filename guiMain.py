@@ -331,5 +331,9 @@ def create_root(root):
 
 
 if __name__ == '__main__':
+
+    # Trial call
+    textRes.setTheme(2)
+
     root = Tk()
     create_root(root)
