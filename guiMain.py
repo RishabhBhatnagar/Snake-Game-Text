@@ -271,8 +271,12 @@ def create_labelBoard(root):
     # Initializing the empty grid
     labelBoard.config(text=textRes.array2D_to_string(textRes.init_list2D()))
 
-    # Set background color as red
+    # Set background color
     labelBoard.config(bg=textRes.bgColor)
+    # Set the text color
+    labelBoard.config(foreground=textRes.fgColor)
+
+    # Border settings
     labelBoard.config(highlightthickness=6)
     labelBoard.config(relief='solid')
 

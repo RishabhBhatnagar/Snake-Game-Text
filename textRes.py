@@ -9,6 +9,7 @@ snakeHead = '@'
 simpleFood = "*"
 specialFood = "%"
 bgColor = 'red'
+fgColor = 'black'
 
 borderList = []
 
