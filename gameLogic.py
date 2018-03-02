@@ -38,6 +38,7 @@ snakeList.append((start_location[0], start_location[1] + 3))
 snakeList.append((start_location[0], start_location[1] + 4))
 
 tailPosition = snakeList[-1]
+previousTailLocation = tailPosition
 
 boolFirstRun = True
 

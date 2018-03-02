@@ -25,6 +25,8 @@ def xy_to_str_replacing(x, y, newString, charToReplace):
 
     return newString
 
+def addLocationToSnakeTail(newTailToBeAppended):
+    gameLogic.snakeList.append(newTailToBeAppended)
 
 def refresh_Grid(event, labelBoard):
     # Setting newString the content of labelBoard
@@ -76,6 +78,11 @@ def refresh_Grid(event, labelBoard):
     #Check if snake swallowed the food :
     if gameLogic.foodY == gameLogic.snakeList[0][1] and gameLogic.foodX == gameLogic.snakeList[0][0]:
         gameLogic.ate = True
+
+        # Food was eaten so we need to add a tail
+        addLocationToSnakeTail(gameLogic.previousTailLocation)
+        print("AAAAAAAAA: SNAKE INCREASED at", gameLogic.previousTailLocation)
+
         gameLogic.points = gameLogic.points + gameLogic.normalPoints
         gameLogic.foodCounter = gameLogic.foodCounter + 1
         print("Points:", gameLogic.points)
@@ -101,6 +108,11 @@ def refresh_Grid(event, labelBoard):
         if gameLogic.splFoodX == gameLogic.snakeList[0][0]:
             if gameLogic.splFoodY == gameLogic.snakeList[0][1]:
                 print("SpecialSwallowed.")
+
+                # Food was eaten so we need to add a tail
+                addLocationToSnakeTail(gameLogic.previousTailLocation)
+                print("AAAAAAAAA: SNAKE INCREASED at", gameLogic.previousTailLocation)
+
                 gameLogic.points = gameLogic.points + gameLogic.specialPoints
                 print("Points :", gameLogic.points)
                 gameLogic.specialFoodGenerated = False
@@ -173,6 +185,10 @@ def change_position(direction):
     for i in reversed(range(len(gameLogic.snakeList) - 1)):
         # Passing the location of first position to the next position
         gameLogic.snakeList[i+1] = gameLogic.snakeList[i]
+
+    # Previous tailPosition is held by tailPosition
+    gameLogic.previousTailLocation = gameLogic.tailPosition
+
 
     if direction == 'up':
         # Shifting head up one space, by giving it new co or dinates
