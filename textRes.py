@@ -6,6 +6,9 @@ border = '='
 blank = ' '
 snakeBody = '#'
 snakeHead = '@'
+simpleFood = "*"
+specialFood = "%"
+bgColor = 'red'
 
 borderList = []
 
