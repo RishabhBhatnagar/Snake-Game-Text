@@ -9,6 +9,48 @@ snakeHead = '@'
 
 borderList = []
 
+
+def theme_change(var):
+    global border
+    global blank
+    global snakeBody
+    global snakeHead
+    global simpleFood
+    global specialFood
+    global bgColor
+    global fgColor
+
+    if var == "THEME :1":
+        border = '='
+        blank = ' '
+        snakeBody = '#'
+        snakeHead = '@'
+        simpleFood = '*'
+        specialFood = '%'
+        bgColor = 'red'
+        fgColor = 'black'
+
+    elif var == "THEME :2":
+        border = '0'
+        blank = ' '
+        snakeBody = 'o'
+        snakeHead = 'M'
+        simpleFood = 'x'
+        specialFood = 'U'
+        bgColor = 'blue'
+        fgColor = 'white'
+
+    elif var == "THEME :3":
+        border = '#'
+        blank = ' '
+        snakeBody = '*'
+        snakeHead = 'O'
+        simpleFood = '8'
+        specialFood = '$'
+        bgColor = 'gray'
+        fgColor = 'blue'
+
+
 def init_list2D():
     '''
     Creates a 2D list with characters placed at correct indices
@@ -71,3 +113,4 @@ def array2D_to_string(list2d):
 
     # Using the [:-1] since we don't want the last new line
     return string2D[:-1]
+
