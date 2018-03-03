@@ -1,10 +1,12 @@
-from tkinter import Tk, Label, PhotoImage, Button, Entry, Frame, StringVar
+from tkinter import Tk, Label, PhotoImage, Button, Entry, Frame, StringVar, OptionMenu
 import textRes
 from tkinter.font import Font
 import gameLogic
 from random import randint
 
-
+#s = StringVar()
+#THis is used to create Name I/P screen
+count=1
 
 
 def string_replace(newString, index, replacementChar):
@@ -266,36 +268,53 @@ def autoMoving(root, labelBo):
 
     # directly call change position
 
-    #THIS CODE IS YET TO BE MODIFIED FOR BUTTONS
 
-def set_up_name():
-    pass
-def get_text():
-    pass
-'''
-def get_text():
-    global e2
 
 
 def set_up_name():
-    sc = Tk()
+
+    sc=Tk()
     sc.geometry("150x100+500+300")
     l1=Label(sc, text="Enter your Name:")
-    l1.grid(row=0, column=1)
+    l1.grid(row=0, column= 1)
 
-    s=StringVar()
-    e1=Entry(sc, textvariable=s)
+    s = StringVar()
+    e1 = Entry(sc, textvariable=s)
     e1.grid(row=1, column=1)
-    e1.focus_set()
-    name=s.get()
 
-    print("--------"+name+"---------")
+    s_text=s.get()
+    name_label=Label(sc, text="jgjhjhsdhsk")
+    name_label.grid(row= 3 ,column=1)
 
-    OK_butt=Button(sc, text="OK!", width=6, command=get_text)
+    OK_butt = Button(sc, text="OK!", width=6, command=sc.destroy)
     OK_butt.grid(row=2, column=1)
 
+    if count==1:
+        name_label.config(text=s_text)
 
-'''
+
+
+
+def set_theme(var):
+    ch=var.get().split(',')
+    if ch=="THEME 1":
+        textRes.snakeHead='@'
+        textRes.snakeBody='#'
+    elif ch=="THEME 2":
+        textRes.snakeHead = '<'
+        textRes.snakeBody = '+'
+    elif ch=="THEME 3":
+        textRes.snakeHead = '$'
+        textRes.snakeBody = '*'
+
+def new_game():
+    pass
+
+def pause_game():
+    pass
+
+def reset_game():
+    pass
 
 def create_root(root):
     #root = Tk()
@@ -329,7 +348,7 @@ def create_root(root):
     l1.grid(row=1, column=1, sticky='ns')
 
 
-    b2 = Button(frame, text='NEW GAME', bg='purple', width=use_x, height=use_y)# pady=8, padx=8
+    b2 = Button(frame, text='NEW GAME', bg='purple', width=use_x, height=use_y, command=new_game)# pady=8, padx=8
     b2.grid_rowconfigure(0, weight=1)
     b2.grid(row=2, column=1, sticky='ns')
 
@@ -339,18 +358,33 @@ def create_root(root):
 
 
 
-    b3 = Button(frame, text='PAUSE', bg='green', width=use_x, height=use_y) # pady=8, padx=8
+    b3 = Button(frame, text='PAUSE', bg='green', width=use_x, height=use_y, command=pause_game) # pady=8, padx=8
     b3.grid_rowconfigure(0, weight=1)
     b3.grid(row=4, column=1, sticky='ns')
 
    # THIS IS JUST USE TO ALLIGN(5,1)
-    l1 = Label(frame, text='4,0', width=use_x)
+    l1 = Label(frame, text='5,1', width=use_x)
     l1.grid(row=5, column=1, sticky='ns')
 
 
-    b4 = Button(frame, text='RESET', bg='red', width=use_x, height=use_y)  # pady=8, padx=8
+    b4 = Button(frame, text='RESET', bg='red', width=use_x, height=use_y, command=reset_game)  # pady=8, padx=8
     b4.grid_rowconfigure(0, weight=1)
     b4.grid(row=6, column=1, sticky='ns')
+
+    # THIS IS JUST USE TO ALLIGN(7,1)
+    l1 = Label(frame, text='7,1', width=use_x)
+    l1.grid(row=7, column=1, sticky='ns')
+
+
+    options = ["THEME 1", "THEME 2", "THEME 3"]
+    var = StringVar()
+    var.set(options[0]) #intial theme settings
+
+    drop = OptionMenu(frame , var, *options)
+    drop.config(bg='yellow', width=use_x-3, height=use_y)
+
+    var.trace('w', lambda : set_theme)
+    drop.grid(row=8 ,column=1)
 
 
     root.after(gameLogic.autoTime, lambda: autoMoving(root, labelBo))
