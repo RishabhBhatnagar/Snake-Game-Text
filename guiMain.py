@@ -316,6 +316,12 @@ def pause_game():
 def reset_game():
     pass
 
+
+def getOption(value):
+    print("OPTION SELECTED FROM DROP:"+value)
+    pass
+
+
 def create_root(root):
     #root = Tk()
 
@@ -380,10 +386,10 @@ def create_root(root):
     var = StringVar()
     var.set(options[0]) #intial theme settings
 
-    drop = OptionMenu(frame , var, *options)
+    drop = OptionMenu(frame , var, command=getOption,*options)
     drop.config(bg='yellow', width=use_x-3, height=use_y)
 
-    var.trace('w', lambda : set_theme)
+    #var.trace('w', lambda : set_theme)
     drop.grid(row=8 ,column=1)
 
 
