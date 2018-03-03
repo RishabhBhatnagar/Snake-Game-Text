@@ -4,10 +4,6 @@ from tkinter.font import Font
 import gameLogic
 from random import randint
 
-#s = StringVar()
-#THis is used to create Name I/P screen
-count=1
-
 
 def string_replace(newString, index, replacementChar):
     newString = newString[:index] \
@@ -216,7 +212,7 @@ def move(event, obj, key):
     refresh_Grid(event, obj)
         
 
-def create_labelBoard(rootb):
+def create_labelBoard(root):
 
     # Creating the labelBoard
     labelBoard = Label(root, text="Hello World", anchor='nw')
@@ -283,29 +279,13 @@ def set_up_name():
     e1.grid(row=1, column=1)
 
     s_text=s.get()
-    name_label=Label(sc, text="jgjhjhsdhsk")
+    name_label=Label(sc, text=s_text)
     name_label.grid(row= 3 ,column=1)
 
     OK_butt = Button(sc, text="OK!", width=6, command=sc.destroy)
     OK_butt.grid(row=2, column=1)
 
-    if count==1:
-        name_label.config(text=s_text)
 
-
-
-
-def set_theme(var):
-    ch=var.get().split(',')
-    if ch=="THEME 1":
-        textRes.snakeHead='@'
-        textRes.snakeBody='#'
-    elif ch=="THEME 2":
-        textRes.snakeHead = '<'
-        textRes.snakeBody = '+'
-    elif ch=="THEME 3":
-        textRes.snakeHead = '$'
-        textRes.snakeBody = '*'
 
 def new_game():
     pass
@@ -376,14 +356,14 @@ def create_root(root):
     l1.grid(row=7, column=1, sticky='ns')
 
 
-    options = ["THEME 1", "THEME 2", "THEME 3"]
+    options = ['THEME :1', 'THEME :2', 'THEME :3']
     var = StringVar()
     var.set(options[0]) #intial theme settings
 
-    drop = OptionMenu(frame , var, *options)
-    drop.config(bg='yellow', width=use_x-3, height=use_y)
+    drop = OptionMenu(frame , var, *options,  command=textRes.theme_change)
+    drop.config(bg='yellow', width=use_x-3, height=use_y )
 
-    var.trace('w', lambda : set_theme)
+    #var.trace('w', textRes.theme_change)
     drop.grid(row=8 ,column=1)
 
 
