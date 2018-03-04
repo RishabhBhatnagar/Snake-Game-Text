@@ -6,9 +6,12 @@ border = '='
 blank = ' '
 snakeBody = '#'
 snakeHead = '@'
+bgColor='red'
+
 
 borderList = []
 
+isthemechange=False
 
 def theme_change(var):
     global border
@@ -30,6 +33,7 @@ def theme_change(var):
         bgColor = 'red'
         fgColor = 'black'
 
+
     elif var == "THEME :2":
         border = '0'
         blank = ' '
@@ -40,6 +44,7 @@ def theme_change(var):
         bgColor = 'blue'
         fgColor = 'white'
 
+
     elif var == "THEME :3":
         border = '#'
         blank = ' '
@@ -49,6 +54,17 @@ def theme_change(var):
         specialFood = '$'
         bgColor = 'gray'
         fgColor = 'blue'
+
+
+    elif var == "THEME :4":
+        border = '@'
+        blank = ' '
+        snakeBody = '-'
+        snakeHead = '#'
+        simpleFood = '*'
+        specialFood = '$'
+        bgColor = 'purple'
+        fgColor = 'yellow'
 
 
 def init_list2D():
@@ -79,7 +95,7 @@ def init_list2D():
 
             else:
                 # middle empty space
-                row.append(' ')
+                row.append(blank)
         wholeList.append(row)
     return wholeList
 

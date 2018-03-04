@@ -1,8 +1,11 @@
-from tkinter import Tk, Label, PhotoImage, Button, Entry, Frame, StringVar, OptionMenu
+from tkinter import Tk, Label, PhotoImage, Button, Entry, Frame, StringVar, OptionMenu, ttk
 import textRes
+
 from tkinter.font import Font
 import gameLogic
 from random import randint
+
+
 
 
 def string_replace(newString, index, replacementChar):
@@ -28,6 +31,10 @@ def xy_to_str_replacing(x, y, newString, charToReplace):
 
 
 def refresh_Grid(event, labelBoard):
+    if textRes.isthemechange:
+        labelBoard.config(text=textRes.array2D_to_string(textRes.init_list2D()))
+        # Set background color as red
+        labelBoard.config(bg=textRes.bgColor)
     # Setting newString the content of labelBoard
     newString = labelBoard['text']
 
@@ -275,15 +282,28 @@ def set_up_name():
     l1.grid(row=0, column= 1)
 
     s = StringVar()
-    e1 = Entry(sc, textvariable=s)
+
+    e1 = ttk.Entry(sc, textvariable=s)
     e1.grid(row=1, column=1)
+    #e1.bind("<OK_butt>", store_ip)
 
-    s_text=s.get()
-    name_label=Label(sc, text=s_text)
-    name_label.grid(row= 3 ,column=1)
+    name_label = ttk.Label(sc, text="NAME SHOULD COME HERE")
+    name_label.grid(row=3, column=1)
 
-    OK_butt = Button(sc, text="OK!", width=6, command=sc.destroy)
+    OK_butt = ttk.Button(sc, text="OK!", width=6, command=store_ip(e1=e1,name_label=name_label))
     OK_butt.grid(row=2, column=1)
+
+
+
+
+def store_ip(e1,name_label):
+    ip_name=e1.get()
+    print(ip_name*5)
+    name_label.config(text=ip_name)
+    name_label.grid(row=3, column=1)
+
+
+
 
 
 
@@ -295,6 +315,12 @@ def pause_game():
 
 def reset_game():
     pass
+
+
+def gm_change_theme(args):
+    textRes.isthemechange=True
+    textRes.theme_change(args)
+
 
 def create_root(root):
     #root = Tk()
@@ -356,11 +382,11 @@ def create_root(root):
     l1.grid(row=7, column=1, sticky='ns')
 
 
-    options = ['THEME :1', 'THEME :2', 'THEME :3']
+    options = ['THEME :1', 'THEME :2', 'THEME :3','THEME :4']
     var = StringVar()
     var.set(options[0]) #intial theme settings
 
-    drop = OptionMenu(frame , var, *options,  command=textRes.theme_change)
+    drop = OptionMenu(frame , var, *options,  command=gm_change_theme)
     drop.config(bg='yellow', width=use_x-3, height=use_y )
 
     #var.trace('w', textRes.theme_change)
