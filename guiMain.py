@@ -35,6 +35,8 @@ def refresh_Grid(event, labelBoard):
         labelBoard.config(text=textRes.array2D_to_string(textRes.init_list2D()))
         # Set background color as red
         labelBoard.config(bg=textRes.bgColor)
+        textRes.isthemechange=False
+
     # Setting newString the content of labelBoard
     newString = labelBoard['text']
 
