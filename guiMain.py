@@ -53,7 +53,7 @@ def addLocationToSnakeTail(newTailToBeAppended):
     gameLogic.snakeList.append(newTailToBeAppended)
 
 
-def refresh_Grid(event, labelBoard):
+def refresh_Grid(event, labelBoard, root):
     """
     Refresh the contents of the labelBoard since objects like:
     1) snake has changed position
@@ -148,6 +148,7 @@ def refresh_Grid(event, labelBoard):
         # If the snakeList head has gone into the border,
         # or outside the bounds in negative direction
         # TODO call gameOver function
+        root.destroy()
         raise ValueError("Indices shouldn't be inside the border")
 
     if gameLogic.boolFirstRun:
@@ -161,7 +162,7 @@ def refresh_Grid(event, labelBoard):
     labelBoard.config(text=newString)
 
 
-def change_position(direction):
+def change_position(direction, root):
     """
     Shift the positions of the snakeList in the specified direction
     :param direction: Takes values 'up', 'left', 'right', 'down'
@@ -173,21 +174,25 @@ def change_position(direction):
         if (gameLogic.snakeList[0][0], gameLogic.snakeList[0][1] - 1) in gameLogic.snakeList:
             # TODO call gameOver function
             print("Collision")
+            root.destroy()
             return
     elif direction == 'left':
         if (gameLogic.snakeList[0][0] - 1, gameLogic.snakeList[0][1]) in gameLogic.snakeList:
             # TODO call gameOver function
             print("Collision")
+            root.destroy()
             return
     elif direction == 'down':
         if (gameLogic.snakeList[0][0], gameLogic.snakeList[0][1] + 1) in gameLogic.snakeList:
             # TODO call gameOver function
             print("Collision")
+            root.destroy()
             return
     elif direction == 'right':
         if (gameLogic.snakeList[0][0] + 1, gameLogic.snakeList[0][1]) in gameLogic.snakeList:
             # TODO call gameOver function
             print("Collision")
+            root.destroy()
             return
 
     gameLogic.tailPosition = gameLogic.snakeList[-1]
@@ -237,13 +242,13 @@ def move(event, obj, key):
 
     # Updating the positions in the snakeList
     # in the specified direction
-    change_position(key)
+    change_position(key, root)
 
     # Updating lastKeyPosition
     gameLogic.lastKeyPosition = key
 
     # Refresh the text contents of labels, after snake has been moved
-    refresh_Grid(event, obj)
+    refresh_Grid(event, obj, root)
 
 
 def create_labelBoard(root):
@@ -303,12 +308,12 @@ def autoMoving(root, labelBo):
     _ = ''
     print("autorun")
     # lastKeyPosition refers to the last key pressed by the user
-    change_position(gameLogic.lastKeyPosition)
+    change_position(gameLogic.lastKeyPosition, root)
 
     # _ is passed as an argument since refresh_Grid takes a event object
     # as the first argument. Since the event object is not used in the
     # function, we can pass a placeholder variable
-    refresh_Grid(_, labelBo)
+    refresh_Grid(_, labelBo, root)
 
     # root.after has to be recursively called,
     # it should be the last statement to be called.
