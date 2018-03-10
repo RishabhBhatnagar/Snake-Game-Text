@@ -2,18 +2,70 @@
 
 width = 40
 height = 17
-
-# Appearance variables default
 border = '='
 blank = ' '
 snakeBody = '#'
 snakeHead = '@'
-simpleFood = '*'
-specialFood = '%'
-bgColor = 'red'
-fgColor = 'black'
+bgColor='red'
+
 
 borderList = []
+
+isthemechange=False
+
+def theme_change(var):
+    global border
+    global blank
+    global snakeBody
+    global snakeHead
+    global simpleFood
+    global specialFood
+    global bgColor
+    global fgColor
+
+    if var == "THEME :1":
+        border = '='
+        blank = ' '
+        snakeBody = '#'
+        snakeHead = '@'
+        simpleFood = '*'
+        specialFood = '%'
+        bgColor = 'red'
+        fgColor = 'black'
+
+
+    elif var == "THEME :2":
+        border = '0'
+        blank = ' '
+        snakeBody = 'o'
+        snakeHead = 'M'
+        simpleFood = 'x'
+        specialFood = 'U'
+        bgColor = 'blue'
+        fgColor = 'white'
+
+
+    elif var == "THEME :3":
+        border = '#'
+        blank = ' '
+        snakeBody = '*'
+        snakeHead = 'O'
+        simpleFood = '8'
+        specialFood = '$'
+        bgColor = 'gray'
+        fgColor = 'blue'
+
+
+    elif var == "THEME :4":
+        border = '@'
+        blank = ' '
+        snakeBody = '-'
+        snakeHead = '#'
+        simpleFood = '*'
+        specialFood = '$'
+        bgColor = 'purple'
+        fgColor = 'yellow'
+
 
 def init_list2D():
     '''
@@ -43,7 +95,7 @@ def init_list2D():
 
             else:
                 # middle empty space
-                row.append(' ')
+                row.append(blank)
         wholeList.append(row)
     return wholeList
 
@@ -77,39 +129,4 @@ def array2D_to_string(list2d):
 
     # Using the [:-1] since we don't want the last new line
     return string2D[:-1]
-
-def setTheme(option):
-    """
-    Select a theme by setting appropriate values to the appearance variables
-    :param option: An integer value selecting the theme
-    :return: None
-    """
-
-    # This is needed, or else python creates local variables
-    global border
-    global blank
-    global snakeBody
-    global snakeHead
-    global simpleFood
-    global specialFood
-    global bgColor
-    global fgColor
-    if option == 1:
-        border = '='
-        blank = ' '
-        snakeBody = '#'
-        snakeHead = '@'
-        simpleFood = '*'
-        specialFood = '%'
-        bgColor = 'red'
-        fgColor = 'black'
-    elif option == 2:
-        border = '0'
-        blank = ' '
-        snakeBody = 'o'
-        snakeHead = 'M'
-        simpleFood = 'x'
-        specialFood = 'U'
-        bgColor = 'blue'
-        fgColor = 'white'
 
