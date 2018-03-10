@@ -5,6 +5,8 @@ from tkinter.font import Font
 import gameLogic
 from random import randint
 
+def game_over(root):
+    root.destroy()
 
 lb = None     #Labelboard for theme changing.
 
@@ -125,6 +127,7 @@ def refresh_Grid(event, labelBoard):
 
     if gameLogic.snakeList[0][1] < 0 or gameLogic.snakeList[0][0] < 0 \
     or (gameLogic.snakeList[0][1], gameLogic.snakeList[0][0]) in textRes.borderList:
+        game_over(root)
         raise ValueError("Indices shouldn't be inside the border")
 
     # If snake has run into the border
@@ -167,18 +170,22 @@ def change_position(direction):
     if direction == 'up':
         if (gameLogic.snakeList[0][0], gameLogic.snakeList[0][1] - 1) in gameLogic.snakeList:
             print("Collision")
+            game_over(root)
             return
     elif direction == 'left':
         if (gameLogic.snakeList[0][0] - 1, gameLogic.snakeList[0][1]) in gameLogic.snakeList:
             print("Collision")
+            game_over(root)
             return
     elif direction == 'down':
         if (gameLogic.snakeList[0][0], gameLogic.snakeList[0][1] + 1) in gameLogic.snakeList:
             print("Collision")
+            game_over(root)
             return
     elif direction == 'right':
         if (gameLogic.snakeList[0][0] + 1, gameLogic.snakeList[0][1]) in gameLogic.snakeList:
             print("Collision")
+            game_over(root)
             return
 
     gameLogic.tailPosition = gameLogic.snakeList[-1]
@@ -414,7 +421,3 @@ if __name__ == '__main__':
 
 
     create_root(root)
-
-
-
-
