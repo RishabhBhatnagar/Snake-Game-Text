@@ -5,6 +5,8 @@ from tkinter.font import Font
 import gameLogic
 from random import randint
 
+def game_over(root):
+    root.destroy()
 
 lb = None     #Labelboard for theme changing.
 
@@ -30,7 +32,7 @@ def xy_to_str_replacing(x, y, newString, charToReplace):
     return newString
 
 
-def refresh_Grid(event, labelBoard):
+def refresh_Grid(event, labelBoard, root):
     global lb
     lb = labelBoard
     if textRes.isthemechange:
@@ -125,6 +127,7 @@ def refresh_Grid(event, labelBoard):
 
     if gameLogic.snakeList[0][1] < 0 or gameLogic.snakeList[0][0] < 0 \
     or (gameLogic.snakeList[0][1], gameLogic.snakeList[0][0]) in textRes.borderList:
+        game_over(root)
         raise ValueError("Indices shouldn't be inside the border")
 
     # If snake has run into the border
@@ -162,23 +165,27 @@ def change_position_up():
                               gameLogic.snakeList[0][1] - 1)
 '''
 
-def change_position(direction):
+def change_position(direction, root):
 
     if direction == 'up':
         if (gameLogic.snakeList[0][0], gameLogic.snakeList[0][1] - 1) in gameLogic.snakeList:
             print("Collision")
+            game_over(root)
             return
     elif direction == 'left':
         if (gameLogic.snakeList[0][0] - 1, gameLogic.snakeList[0][1]) in gameLogic.snakeList:
             print("Collision")
+            game_over(root)
             return
     elif direction == 'down':
         if (gameLogic.snakeList[0][0], gameLogic.snakeList[0][1] + 1) in gameLogic.snakeList:
             print("Collision")
+            game_over(root)
             return
     elif direction == 'right':
         if (gameLogic.snakeList[0][0] + 1, gameLogic.snakeList[0][1]) in gameLogic.snakeList:
             print("Collision")
+            game_over(root)
             return
 
     gameLogic.tailPosition = gameLogic.snakeList[-1]
@@ -216,12 +223,12 @@ def move(event, obj, key):
         change_position('right')
     '''
 
-    change_position(key)
+    change_position(key, root)
 
     # Updating lastKeyPosition
     gameLogic.lastKeyPosition = key
 
-    refresh_Grid(event, obj)
+    refresh_Grid(event, obj, root)
         
 
 def create_labelBoard(root):
@@ -268,8 +275,8 @@ def autoMoving(root, labelBo):
     '''
     _ = ''
     print("autorun")
-    change_position(gameLogic.lastKeyPosition)
-    refresh_Grid(_, labelBo)
+    change_position(gameLogic.lastKeyPosition, root)
+    refresh_Grid(_, labelBo, root)
     root.after(gameLogic.autoTime, lambda: autoMoving(root, labelBo))
 
 
